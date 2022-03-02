@@ -453,8 +453,12 @@ def calc_avg_qps(qps: list):
     """
     get_qps = [float(x.split("  ")[1]) for x in qps]
     set_qps = [float(x.split("  ")[2]) for x in qps]
-    get_qps_without_zero = [x for x in get_qps if x > 1]
-    set_qps_without_zero = [x for x in set_qps if x > 1]
+    get_qps_without_zero = [x for x in get_qps if x > 0.1]
+    set_qps_without_zero = [x for x in set_qps if x > 0.1]
+    if (len(get_qps_without_zero) == 0):
+        get_qps_without_zero = [0]
+    if (len(set_qps_without_zero) == 0):
+        set_qps_without_zero = [0]
     get_min = min(get_qps_without_zero)
     set_min = min(set_qps_without_zero)
     get_max = max(get_qps_without_zero)
